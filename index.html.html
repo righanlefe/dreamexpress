@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>드림고속 관광버스</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body { margin:0; font-family:'Noto Sans KR',sans-serif; background:#fff; color:#222; line-height:1.6; }
+    nav { position:sticky; top:0; background:rgba(0,0,48,0.8); display:flex; justify-content:center; padding:0.8rem; z-index:1000; }
+    nav a { color:white; margin:0 15px; text-decoration:none; font-weight:500; transition:0.3s; }
+    nav a:hover { color:#ffd700; }
+
+    .hero {
+      position: relative;
+      height: 80vh;
+      background: url('https://tse3.mm.bing.net/th/id/OIP.jeEC4GVGUncXhkgZYyU40gHaEK?pid=Api') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: white;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      padding-left: 5%;
+    }
+    .hero h2 { font-size: 2.8rem; margin: 0; }
+    .hero p { margin-top: 0.8rem; font-size: 1.2rem; max-width: 400px; }
+
+    section { max-width:1100px; margin:auto; padding:4rem 1.5rem; }
+    h2 { margin-bottom:1.5rem; font-size:1.8rem; color:#004080; }
+
+    .about { display:flex; flex-wrap:wrap; gap:2rem; align-items:center; }
+    .about img { flex:1; max-width:450px; border-radius:10px; object-fit:cover; }
+
+    .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem; margin-top:2rem; }
+    .feature { background:#fff; border:1px solid #eee; border-radius:8px; padding:2rem; text-align:center; }
+    .feature i { font-size:2rem; color:#004080; margin-bottom:0.8rem; }
+
+    .services { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin-top:2rem; }
+    .service { background:#f9f9f9; border-radius:8px; padding:2rem; text-align:center; border:1px solid #eee; }
+    .service i { font-size:2rem; color:#0055a5; margin-bottom:0.8rem; }
+
+    .fleet { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; }
+    .card { background:#fff; border:1px solid #eee; border-radius:10px; padding:1rem; text-align:center; }
+    .card img { width:100%; height:180px; border-radius:8px; object-fit:cover; background:#eee; margin-bottom:1rem; }
+
+    /* 문의 및 예약 */
+    .reservation { display:flex; flex-wrap:wrap; gap:2rem; align-items:flex-start; }
+    .contact-info { flex:1; min-width:250px; background:#f9f9f9; padding:2rem; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.05); }
+    .contact-info p { margin:0.5rem 0; }
+    .reservation-box { flex:1; min-width:250px; text-align:center; }
+    .reservation-box p { margin-bottom:1.5rem; }
+    .btn {
+      display:inline-block;
+      background:#004080;
+      color:white;
+      padding:12px 24px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:bold;
+      transition:0.3s;
+    }
+    .btn:hover { background:#0055a5; }
+
+    /* 운행실적 */
+    .performance { margin-top:3rem; }
+    .performance-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:1.5rem; }
+    .performance-item { background:#fff; border:1px solid #eee; border-radius:10px; padding:2rem; text-align:center; box-shadow:0 3px 6px rgba(0,0,0,0.05); }
+    .performance-item img { max-width:150px; margin-bottom:1rem; }
+
+    footer { background:#003060; color:white; text-align:center; padding:1rem; margin-top:2rem; }
+
+    @media (max-width:768px) {
+      .hero { justify-content:center; text-align:center; padding:0 2rem; }
+      .hero h2 { font-size:2rem; }
+      .reservation { flex-direction:column; }
+      .about { flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 네비게이션 -->
+  <nav>
+    <a href="#about">회사소개</a>
+    <a href="#strengths">강점</a>
+    <a href="#services">제공 서비스</a>
+    <a href="#fleet">보유차량</a>
+    <a href="#reservation">문의 및 예약</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <h2>20년 이상 이어온 믿음과 신뢰</h2>
+      <p>드림고속은 안전과 편안함을 최우선으로, 전국과 제주를 연결하는 관광 파트너입니다.</p>
+    </div>
+  </section>
+
+  <!-- 회사소개 -->
+  <section id="about">
+    <h2>회사소개</h2>
+    <div class="about">
+      <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=900&q=60" alt="회사 및 기사님 이미지">
+      <p>2005년 작은 시작으로 출발한 드림고속은 현재 최신형 관광버스 20대 이상을 보유하며, 기업, 학교, 가족 고객과 함께 수많은 여행의 길을 동행하고 있습니다. "안전, 신뢰, 고객만족"을 모토로 다양한 단체·기업·학교·가족 여행을 함께하고 있습니다.</p>
+    </div>
+  </section>
+
+  <!-- 강점 -->
+  <section id="strengths">
+    <h2>드림고속의 강점</h2>
+    <div class="features">
+      <div class="feature"><i class="fa-solid fa-shield-halved"></i><h3>안전 최우선</h3><p>정기 점검과 20년 무사고 기록</p></div>
+      <div class="feature"><i class="fa-solid fa-bus"></i><h3>최신 차량</h3><p>유니버스 2025년식 포함 최신형 보유</p></div>
+      <div class="feature"><i class="fa-solid fa-user-tie"></i><h3>전문 기사</h3><p>친절하고 경험 많은 기사님 배치</p></div>
+      <div class="feature"><i class="fa-solid fa-headset"></i><h3>전문 상담</h3><p>제주도 여행 전문 상담사가 고객님의 일정에 맞는 최적의 솔루션을 제안합니다.</p></div>
+      <div class="feature"><i class="fa-solid fa-award"></i><h3>25년 전통</h3><p>2000년 창사 이래로 25년 이상 제주도 여행객들과 함께해왔습니다.</p></div>
+    </div>
+  </section>
+
+  <!-- 제공 서비스 -->
+  <section id="services">
+    <h2>제공 서비스</h2>
+    <div class="services">
+      <div class="service"><i class="fa-solid fa-graduation-cap"></i><h3>수학여행</h3></div>
+      <div class="service"><i class="fa-solid fa-briefcase"></i><h3>기업행사</h3></div>
+      <div class="service"><i class="fa-solid fa-people-group"></i><h3>단체행사</h3></div>
+      <div class="service"><i class="fa-solid fa-map"></i><h3>도내관광</h3></div>
+      <div class="service"><i class="fa-solid fa-plane-arrival"></i><h3>공항셔틀버스</h3></div>
+      <div class="service"><i class="fa-solid fa-building"></i><h3>기업출퇴근버스</h3></div>
+    </div>
+  </section>
+
+  <!-- 보유차량 -->
+  <section id="fleet">
+    <h2>보유차량</h2>
+    <div class="fleet">
+      <div class="card"><img src="https://tse3.mm.bing.net/th/id/OIP.jeEC4GVGUncXhkgZYyU40gHaEK?pid=Api" alt="45인승 대형버스"><h3>45인승 대형버스</h3></div>
+      <div class="card"><img src="https://tse2.mm.bing.net/th/id/OIP.zbHWKP8toOdA_01au0j3tgHaE8?pid=Api" alt="28인승 리무진버스"><h3>28인승 대형 리무진버스</h3></div>
+      <div class="card"><img src="https://tse3.mm.bing.net/th/id/OIP.R0kNhR_AM6md7SpwhOMhpwHaE7?pid=Api" alt="25인승 소형버스"><h3>25인승 소형버스</h3></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1618840468711-c9f7e4f1cbb1?auto=format&fit=crop&w=900&q=60" alt="16인승 솔라티"><h3>16인승 솔라티</h3></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1618861556975-ec0b57fb8d33?auto=format&fit=crop&w=900&q=60" alt="16인승 벤츠 스프린터"><h3>16인승 벤츠 스프린터</h3></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1602407294739-2d9d9eade6f4?auto=format&fit=crop&w=900&q=60" alt="기타 차량"><h3>기타 차량</h3></div>
+    </div>
+  </section>
+
+  <!-- 문의 및 예약 -->
+  <section id="reservation">
+    <h2>문의 및 예약</h2>
+    <div class="reservation">
+      <!-- 왼쪽: 연락처 -->
+      <div class="contact-info">
+        <p><strong>대표전화:</strong> 010-1234-5678</p>
+        <p><strong>카카오톡:</strong> @dreambus</p>
+        <p><strong>이메일:</strong> dreamtour@naver.com</p>
+        <p><strong>주소:</strong> 제주특별자치도 제주시 ○○로 123</p>
+        <p><strong>상담시간:</strong> 월~토 09:00 ~ 18:00</p>
+      </div>
+      <!-- 오른쪽: 예약 안내 -->
+      <div class="reservation-box">
+        <p>예약은 구글폼을 통해 간편하게 하실 수 있습니다.<br>아래 버튼을 클릭하면 예약 페이지로 이동합니다.</p>
+        <a href="https://forms.gle/여기에_구글폼_URL" target="_blank" class="btn"><i class="fa-solid fa-calendar-check"></i> 예약하기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 운행실적 -->
+  <section class="performance">
+    <h2>운행실적</h2>
+    <div class="performance-grid">
+      <div class="performance-item"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Hyundai-logo.png" alt="현대자동차"><p>현대자동차</p></div>
+      <div class="performance-item"><img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Samsung_Logo.svg" alt="삼성"><p>삼성그룹</p></div>
+      <div class="performance-item"><img src="https://upload.wikimedia.org/wikipedia/commons/5/59/LG_logo_%282015%29.svg" alt="LG"><p>LG그룹</p></div>
+      <div class="performance-item"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Jeju_Air_logo.svg" alt="제주항공"><p>제주항공</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 드림고속 관광버스. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>
