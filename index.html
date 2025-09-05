@@ -6,53 +6,59 @@
   <title>드림고속 관광버스</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    body { margin:0; font-family:'Noto Sans KR',sans-serif; background:#fff; color:#222; line-height:1.6; }
-    nav { position:sticky; top:0; background:rgba(0,0,48,0.8); display:flex; justify-content:center; padding:0.8rem; z-index:1000; }
+    body { margin:0; font-family:'Noto Sans KR',sans-serif; background:#fff; color:#111; line-height:1.6; }
+    nav { position:sticky; top:0; background:#000; display:flex; justify-content:center; padding:0.8rem; z-index:1000; }
     nav a { color:white; margin:0 15px; text-decoration:none; font-weight:500; transition:0.3s; }
-    nav a:hover { color:#ffd700; }
+    nav a:hover { color:#999; }
 
-   .hero {
-  position: relative;
-  height: 80vh;
-  background: url("1.png") center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  color: white;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-  padding-left: 5%;
-}
-
+    .hero {
+      position: relative;
+      height: 80vh;
+      background: url("1.png") center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: white;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      padding-left: 5%;
+    }
     .hero h2 { font-size: 2.8rem; margin: 0; }
     .hero p { margin-top: 0.8rem; font-size: 1.2rem; max-width: 400px; }
 
     section { max-width:1100px; margin:auto; padding:4rem 1.5rem; }
-    h2 { margin-bottom:1.5rem; font-size:1.8rem; color:#004080; }
+    h2 { margin-bottom:1.5rem; font-size:1.8rem; color:#000; text-align:center; }
 
     .about { display:flex; flex-wrap:wrap; gap:2rem; align-items:center; }
     .about img { flex:1; max-width:450px; border-radius:10px; object-fit:cover; }
 
-    .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem; margin-top:2rem; }
-    .feature { background:#fff; border:1px solid #eee; border-radius:8px; padding:2rem; text-align:center; }
-    .feature i { font-size:2rem; color:#004080; margin-bottom:0.8rem; }
+    .features, .services, .fleet, .performance-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:1rem;
+      margin-top:2rem;
+    }
 
-    .services { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin-top:2rem; }
-    .service { background:#f9f9f9; border-radius:8px; padding:2rem; text-align:center; border:1px solid #eee; }
-    .service i { font-size:2rem; color:#0055a5; margin-bottom:0.8rem; }
+    .feature, .service, .card, .performance-item {
+      background:#fff;
+      border:1px solid #ddd;
+      border-radius:8px;
+      padding:1.5rem;
+      text-align:center;
+      box-shadow:0 2px 5px rgba(0,0,0,0.05);
+    }
 
-    .fleet { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; }
-    .card { background:#fff; border:1px solid #eee; border-radius:10px; padding:1rem; text-align:center; }
-    .card img { width:100%; height:180px; border-radius:8px; object-fit:cover; background:#eee; margin-bottom:1rem; }
+    .feature i, .service i { font-size:2rem; color:#000; margin-bottom:0.5rem; }
+    .card img, .about img, .performance-item img {
+      width:100%; max-height:160px; object-fit:cover; border-radius:6px;
+    }
 
     /* 문의 및 예약 */
     .reservation { display:flex; flex-wrap:wrap; gap:2rem; align-items:flex-start; }
     .contact-info { flex:1; min-width:250px; background:#f9f9f9; padding:2rem; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.05); }
-    .contact-info p { margin:0.5rem 0; }
     .reservation-box { flex:1; min-width:250px; text-align:center; }
-    .reservation-box p { margin-bottom:1.5rem; }
     .btn {
       display:inline-block;
-      background:#004080;
+      background:#000;
       color:white;
       padding:12px 24px;
       border-radius:8px;
@@ -60,21 +66,32 @@
       font-weight:bold;
       transition:0.3s;
     }
-    .btn:hover { background:#0055a5; }
+    .btn:hover { background:#444; }
 
-    /* 운행실적 */
-    .performance { margin-top:3rem; }
-    .performance-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:1.5rem; }
-    .performance-item { background:#fff; border:1px solid #eee; border-radius:10px; padding:2rem; text-align:center; box-shadow:0 3px 6px rgba(0,0,0,0.05); }
-    .performance-item img { max-width:150px; margin-bottom:1rem; }
+    footer { background:#000; color:white; text-align:center; padding:1rem; margin-top:2rem; }
 
-    footer { background:#003060; color:white; text-align:center; padding:1rem; margin-top:2rem; }
-
+    /* 반응형 */
+    @media (max-width:1024px) {
+      .hero { height:60vh; justify-content:center; text-align:center; padding:0 1rem; }
+      .hero h2 { font-size:2.2rem; }
+      .hero p { font-size:1rem; }
+    }
     @media (max-width:768px) {
-      .hero { justify-content:center; text-align:center; padding:0 2rem; }
-      .hero h2 { font-size:2rem; }
-      .reservation { flex-direction:column; }
       .about { flex-direction:column; }
+      .reservation { flex-direction:column; }
+      .features, .services, .fleet, .performance-grid {
+        grid-template-columns:repeat(3,1fr); /* 모바일에서 3개씩 */
+      }
+      .card img, .about img, .performance-item img { max-height:120px; }
+      h2 { font-size:1.5rem; }
+    }
+    @media (max-width:480px) {
+      nav a { margin:0 8px; font-size:0.9rem; }
+      .hero h2 { font-size:1.8rem; }
+      .hero p { font-size:0.9rem; }
+      .features, .services, .fleet, .performance-grid {
+        grid-template-columns:repeat(2,1fr); /* 작은 화면에서는 2개씩 */
+      }
     }
   </style>
 </head>
@@ -149,7 +166,6 @@
   <section id="reservation">
     <h2>문의 및 예약</h2>
     <div class="reservation">
-      <!-- 왼쪽: 연락처 -->
       <div class="contact-info">
         <p><strong>대표전화:</strong> 010-1234-5678</p>
         <p><strong>카카오톡:</strong> @dreambus</p>
@@ -157,7 +173,6 @@
         <p><strong>주소:</strong> 제주특별자치도 제주시 ○○로 123</p>
         <p><strong>상담시간:</strong> 월~토 09:00 ~ 18:00</p>
       </div>
-      <!-- 오른쪽: 예약 안내 -->
       <div class="reservation-box">
         <p>예약은 구글폼을 통해 간편하게 하실 수 있습니다.<br>아래 버튼을 클릭하면 예약 페이지로 이동합니다.</p>
         <a href="https://forms.gle/여기에_구글폼_URL" target="_blank" class="btn"><i class="fa-solid fa-calendar-check"></i> 예약하기</a>
@@ -182,12 +197,6 @@
 
 </body>
 </html>
-
-
-
-
-
-
 
 
 
