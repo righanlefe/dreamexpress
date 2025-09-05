@@ -28,9 +28,18 @@
     section { max-width:1100px; margin:auto; padding:4rem 1.5rem; }
     h2 { margin-bottom:1.5rem; font-size:1.8rem; color:#000; text-align:center; }
 
+    /* 회사소개 */
     .about { display:flex; flex-wrap:wrap; gap:2rem; align-items:center; }
-    .about img { flex:1; max-width:450px; border-radius:10px; object-fit:cover; }
+    .about img {
+      flex:1;
+      max-width:450px;   /* PC에서 큰 사이즈 */
+      width:100%;
+      height:auto;
+      border-radius:10px;
+      object-fit:cover;
+    }
 
+    /* 공통 그리드 */
     .features, .services, .fleet, .performance-grid {
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -48,13 +57,20 @@
     }
 
     .feature i, .service i { font-size:2rem; color:#000; margin-bottom:0.5rem; }
-    .card img, .about img, .performance-item img {
-      width:100%; max-height:160px; object-fit:cover; border-radius:6px;
+    .card img, .performance-item img {
+      width:100%;
+      max-height:160px;
+      object-fit:cover;
+      border-radius:6px;
     }
 
     /* 문의 및 예약 */
     .reservation { display:flex; flex-wrap:wrap; gap:2rem; align-items:flex-start; }
-    .contact-info { flex:1; min-width:250px; background:#f9f9f9; padding:2rem; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.05); }
+    .contact-info {
+      flex:1; min-width:250px;
+      background:#f9f9f9; padding:2rem;
+      border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.05);
+    }
     .reservation-box { flex:1; min-width:250px; text-align:center; }
     .btn {
       display:inline-block;
@@ -68,6 +84,10 @@
     }
     .btn:hover { background:#444; }
 
+    /* 운행실적 */
+    .performance { margin-top:3rem; }
+    .performance-item img { max-width:150px; margin-bottom:1rem; }
+
     footer { background:#000; color:white; text-align:center; padding:1rem; margin-top:2rem; }
 
     /* 반응형 */
@@ -78,11 +98,12 @@
     }
     @media (max-width:768px) {
       .about { flex-direction:column; }
+      .about img { max-width:100%; } /* 모바일에서는 가로폭에 맞춤 */
       .reservation { flex-direction:column; }
       .features, .services, .fleet, .performance-grid {
         grid-template-columns:repeat(3,1fr); /* 모바일에서 3개씩 */
       }
-      .card img, .about img, .performance-item img { max-height:120px; }
+      .card img, .performance-item img { max-height:120px; }
       h2 { font-size:1.5rem; }
     }
     @media (max-width:480px) {
@@ -197,6 +218,5 @@
 
 </body>
 </html>
-
 
 
