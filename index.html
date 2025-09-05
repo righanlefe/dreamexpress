@@ -11,6 +11,7 @@
     nav a { color:white; margin:0 15px; text-decoration:none; font-weight:500; transition:0.3s; }
     nav a:hover { color:#999; }
 
+    /* Hero */
     .hero {
       position: relative;
       height: 80vh;
@@ -18,12 +19,17 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      color: white;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
       padding-left: 5%;
     }
+    .hero-text {
+      background: rgba(0,0,0,0.5);  /* 반투명 블랙 박스 */
+      padding: 1.5rem 2rem;
+      border-radius: 10px;
+      color: white;
+      max-width: 500px;
+    }
     .hero h2 { font-size: 2.8rem; margin: 0; }
-    .hero p { margin-top: 0.8rem; font-size: 1.2rem; max-width: 400px; }
+    .hero p { margin-top: 0.8rem; font-size: 1.2rem; }
 
     section { max-width:1100px; margin:auto; padding:4rem 1.5rem; }
     h2 { margin-bottom:1.5rem; font-size:1.8rem; color:#000; text-align:center; }
@@ -42,7 +48,6 @@
     /* 공통 그리드 */
     .features, .services, .fleet, .performance-grid {
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
       gap:1rem;
       margin-top:2rem;
     }
@@ -57,11 +62,19 @@
     }
 
     .feature i, .service i { font-size:2rem; color:#000; margin-bottom:0.5rem; }
+
     .card img, .performance-item img {
       width:100%;
-      max-height:160px;
-      object-fit:cover;
       border-radius:6px;
+      object-fit:cover;
+    }
+
+    /* 보유차량 (PC환경 크게 복구) */
+    .fleet {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+    .card img {
+      height:220px; /* PC환경에서 크게 */
     }
 
     /* 문의 및 예약 */
@@ -86,6 +99,9 @@
 
     /* 운행실적 */
     .performance { margin-top:3rem; }
+    .performance-grid {
+      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    }
     .performance-item img { max-width:150px; margin-bottom:1rem; }
 
     footer { background:#000; color:white; text-align:center; padding:1rem; margin-top:2rem; }
@@ -93,17 +109,18 @@
     /* 반응형 */
     @media (max-width:1024px) {
       .hero { height:60vh; justify-content:center; text-align:center; padding:0 1rem; }
+      .hero-text { max-width:90%; }
       .hero h2 { font-size:2.2rem; }
       .hero p { font-size:1rem; }
     }
     @media (max-width:768px) {
       .about { flex-direction:column; }
-      .about img { max-width:100%; } /* 모바일에서는 가로폭에 맞춤 */
+      .about img { max-width:100%; }
       .reservation { flex-direction:column; }
       .features, .services, .fleet, .performance-grid {
         grid-template-columns:repeat(3,1fr); /* 모바일에서 3개씩 */
       }
-      .card img, .performance-item img { max-height:120px; }
+      .card img { height:150px; }
       h2 { font-size:1.5rem; }
     }
     @media (max-width:480px) {
@@ -113,6 +130,7 @@
       .features, .services, .fleet, .performance-grid {
         grid-template-columns:repeat(2,1fr); /* 작은 화면에서는 2개씩 */
       }
+      .card img { height:120px; }
     }
   </style>
 </head>
@@ -129,7 +147,7 @@
 
   <!-- Hero -->
   <section class="hero">
-    <div>
+    <div class="hero-text">
       <h2>20년 이상 이어온 믿음과 신뢰</h2>
       <p>드림고속은 안전과 편안함을 최우선으로, 전국과 제주를 연결하는 관광 파트너입니다.</p>
     </div>
@@ -218,5 +236,3 @@
 
 </body>
 </html>
-
-
