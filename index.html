@@ -24,8 +24,8 @@
     .hero h2 {
       font-size: 2.8rem;
       margin: 0;
-      color: #fff;             /* 흰색 텍스트 */
-      white-space: nowrap;     /* 줄바꿈 방지 */
+      color: #fff;
+      white-space: nowrap;
     }
     .hero p { margin-top: 0.8rem; font-size: 1.2rem; color:#fff; }
 
@@ -65,7 +65,75 @@
       box-shadow:0 2px 5px rgba(0,0,0,0.05);
     }
 
-    .feature i, .service i { font-size:2rem; color:#000; margin-bottom:0.5rem; }
+    /* 강점 섹션 개선 */
+    .feature {
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+    }
+    
+    .feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .feature:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #007bff, #0056b3);
+    }
+    
+    .feature i {
+      font-size: 3rem;
+      color: #007bff;
+      margin-bottom: 1rem;
+      padding: 20px;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem auto;
+      transition: all 0.3s ease;
+    }
+    
+    .feature:hover i {
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      color: white;
+      transform: scale(1.1);
+    }
+    
+    .feature h3 {
+      color: #2c3e50;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .feature p {
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    .feature-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+
+    .service i { font-size:2rem; color:#000; margin-bottom:0.5rem; }
 
     /* 제공 서비스 이미지 크기 조정 */
     .service img {
@@ -82,7 +150,7 @@
       object-fit:cover;
     }
 
-    /* 보유차량 (PC환경 크게 복구) */
+    /* 보유차량 */
     .fleet {
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     }
@@ -130,13 +198,13 @@
       .about img { max-width:100%; }
       .reservation { flex-direction:column; }
       .features, .services {
-        grid-template-columns:repeat(3,1fr); /* 모바일에서 3개씩 */
+        grid-template-columns:repeat(3,1fr);
       }
       .fleet, .performance-grid {
         grid-template-columns:repeat(3,1fr);
       }
       .card img { height:150px; }
-      .service img { height:140px; } /* 모바일에서 서비스 이미지 높이 조정 */
+      .service img { height:140px; }
       h2 { font-size:1.5rem; }
     }
     @media (max-width:480px) {
@@ -144,10 +212,10 @@
       .hero h2 { font-size:1.6rem; }
       .hero p { font-size:0.9rem; }
       .features, .services, .fleet, .performance-grid {
-        grid-template-columns:repeat(2,1fr); /* 작은 화면에서는 2개씩 */
+        grid-template-columns:repeat(2,1fr);
       }
       .card img { height:120px; }
-      .service img { height:120px; } /* 작은 화면에서 서비스 이미지 높이 조정 */
+      .service img { height:120px; }
     }
   </style>
 </head>
@@ -185,11 +253,36 @@
   <section id="strengths">
     <h2>드림고속의 강점</h2>
     <div class="features">
-      <div class="feature"><i class="fa-solid fa-shield-halved"></i><h3>안전 최우선</h3><p>자체 전문 정비팀 운영</p></div>
-      <div class="feature"><i class="fa-solid fa-bus"></i><h3>다양한 차종 및 최신 차량</h3><p>전세버스 전 차종 및 최신 차량 보유. 최신 차량 배정을 원할시 특별 요청하세요 !</p></div>
-      <div class="feature"><i class="fa-solid fa-user-tie"></i><h3>전문 기사</h3><p>친절하고 경험 많은 기사님 배치. 불친절 기사 신고시 즉시 교체. 100% 회사 소속 기사님 배치로 운전원과 갈등을 최소화하고 편안한 여행을 만들어드립니다. </p></div>
-      <div class="feature"><i class="fa-solid fa-headset"></i><h3>전문 상담</h3><p>여행 일정 문의 전화 주세요 ! 제주도 여행 전문 상담사가 고객님의 일정에 맞는 최적의 솔루션을 제안합니다.</p></div>
-      <div class="feature"><i class="fa-solid fa-award"></i><h3>25년 전통</h3><p>2000년 창사 이래로 25년 이상 제주도 여행객들과 함께해왔습니다.</p></div>
+      <div class="feature">
+        <i class="fa-solid fa-shield-halved"></i>
+        <h3>안전 최우선</h3>
+        <p>자체 전문 정비팀 운영으로<br>최상의 안전을 보장합니다</p>
+        <div class="feature-badge">SAFETY</div>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-bus"></i>
+        <h3>다양한 차종 및 최신 차량</h3>
+        <p>전세버스 전 차종 및 최신 차량 보유<br>최신 차량 배정을 원할시 특별 요청하세요!</p>
+        <div class="feature-badge">NEW</div>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-user-tie"></i>
+        <h3>전문 기사</h3>
+        <p>친절하고 경험 많은 기사님 배치<br>100% 회사 소속으로 안심 서비스</p>
+        <div class="feature-badge">PRO</div>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-headset"></i>
+        <h3>전문 상담</h3>
+        <p>제주도 여행 전문 상담사가<br>최적의 솔루션을 제안합니다</p>
+        <div class="feature-badge">24/7</div>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-award"></i>
+        <h3>25년 전통</h3>
+        <p>2000년 창사 이래로 25년 이상<br>제주도 여행객들과 함께해왔습니다</p>
+        <div class="feature-badge">TRUST</div>
+      </div>
     </div>
   </section>
 
