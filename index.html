@@ -177,7 +177,29 @@
       transition:0.3s;
     }
     .btn:hover { background:#444; }
+css.kakao-btn {
+  display: inline-block;
+  background: #FEE500;
+  color: #3C1E1E;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 10px 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
 
+.kakao-btn:hover {
+  background: #F5D800;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.kakao-btn i {
+  margin-right: 5px;
+}
+    
     /* 운행실적 */
     .performance { margin-top:3rem; }
     .performance-grid {
@@ -320,6 +342,9 @@
       <div class="contact-info">
         <p><strong>대표전화:</strong> 064-746-7300</p>
         <p><strong>카카오톡:</strong> @드림고속</p>
+        <a href="http://pf.kakao.com/_wTPkn/chat" target="_blank" class="kakao-btn">
+  <i class="fa-solid fa-comment"></i> 카카오톡 상담하기
+</a>
         <p><strong>이메일:</strong> ans2941@daum.com</p>
         <p><strong>주소:</strong> 제주특별자치도 제주시 평화로 2861</p>
         <p><strong>상담시간:</strong> 연중무휴</p>
@@ -348,6 +373,7 @@
 
 </body>
 </html>
+
 
 
 
