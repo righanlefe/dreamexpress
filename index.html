@@ -199,7 +199,26 @@ css.kakao-btn {
 .kakao-btn i {
   margin-right: 5px;
 }
-    
+    .naver-btn {
+  display: inline-block;
+  background: #03C75A;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.naver-btn:hover {
+  background: #02B351;
+  transform: translateY(-2px);
+}
+
+.naver-btn i {
+  margin-right: 5px;
+}
     /* 운행실적 스타일 */
 .performance-summary {
   display: grid;
@@ -430,10 +449,15 @@ css.kakao-btn {
         <p><strong>상담시간:</strong> 연중무휴</p>
       </div>
       <div class="reservation-box">
-        <p>예약은 구글폼을 통해 간편하게 하실 수 있습니다.<br>아래 버튼을 클릭하면 예약 페이지로 이동합니다.</p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScNUg0N6szqnw3JM7S7ubIZMqvCFOPRNj3o_EnLqRhxPQA5Xw/viewform?usp=header" target="_blank" class="btn"><i class="fa-solid fa-calendar-check"></i> 예약하기</a>
-      </div>
-    </div>
+        <div class="reservation-box">
+  <p>예약은 구글폼을 통해 간편하게 하실 수 있습니다.<br>아래 버튼을 클릭하면 예약 페이지로 이동합니다.</p>
+  <a href="https://forms.gle/여기에_구글폼_URL" target="_blank" class="btn"><i class="fa-solid fa-calendar-check"></i> 예약하기</a>
+  
+  <p style="margin-top: 2rem;">또는 네이버 스토어에서도 예약 가능합니다</p>
+  <a href="https://smartstore.naver.com/여기에_스토어_URL" target="_blank" class="naver-btn">
+    <i class="fa-solid fa-store"></i> 네이버 스토어에서 예약하기
+  </a>
+</div>
   </section>
 
 <!-- 운행실적 -->
@@ -531,6 +555,7 @@ css.kakao-btn {
 
 </body>
 </html>
+
 
 
 
