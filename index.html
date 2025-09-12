@@ -200,14 +200,78 @@ css.kakao-btn {
   margin-right: 5px;
 }
     
-    /* 운행실적 */
-    .performance { margin-top:3rem; }
-    .performance-grid {
-      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
-    }
-    .performance-item img { max-width:150px; margin-bottom:1rem; }
+    /* 운행실적 스타일 */
+.performance-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0 3rem 0;
+  text-align: center;
+}
 
-    footer { background:#000; color:white; text-align:center; padding:1rem; margin-top:2rem; }
+.summary-item {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  padding: 2rem 1rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+}
+
+.summary-item h3 {
+  font-size: 2.5rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: bold;
+}
+
+.summary-item p {
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.performance-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.category {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.category h4 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.category h4 i {
+  color: #007bff;
+}
+
+.category ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e9ecef;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.category li:last-child {
+  border-bottom: none;
+}
 
     /* 반응형 */
     @media (max-width:1024px) {
@@ -238,6 +302,22 @@ css.kakao-btn {
       }
       .card img { height:120px; }
       .service img { height:120px; }
+    .performance-summary {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.performance-categories {
+  grid-template-columns: 1fr;
+}
+
+.summary-item {
+  padding: 1.5rem 1rem;
+}
+
+.summary-item h3 {
+  font-size: 2rem;
+}
     }
   </style>
 </head>
@@ -356,16 +436,89 @@ css.kakao-btn {
     </div>
   </section>
 
-  <!-- 운행실적 -->
-  <section class="performance">
-    <h2>운행실적</h2>
-    <div class="performance-grid">
-      <div class="performance-item"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Hyundai-logo.png" alt="현대자동차"><p>현대자동차</p></div>
-      <div class="performance-item"><img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Samsung_Logo.svg" alt="삼성"><p>삼성그룹</p></div>
-      <div class="performance-item"><img src="https://upload.wikimedia.org/wikipedia/commons/5/59/LG_logo_%282015%29.svg" alt="LG"><p>LG그룹</p></div>
-      <div class="performance-item"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Jeju_Air_logo.svg" alt="제주항공"><p>제주항공</p></div>
+<!-- 운행실적 -->
+<section class="performance">
+  <h2>운행실적</h2>
+  <div class="performance-summary">
+    <div class="summary-item">
+      <h3>25년+</h3>
+      <p>운행 경험</p>
     </div>
-  </section>
+    <div class="summary-item">
+      <h3>200+</h3>
+      <p>협력 업체</p>
+    </div>
+    <div class="summary-item">
+      <h3>58대</h3>
+      <p>보유 차량</p>
+    </div>
+    <div class="summary-item">
+      <h3>1등급</h3>
+      <p>안전 공시</p>
+    </div>
+  </div>
+  
+  <h3 style="text-align: center; margin: 3rem 0 2rem 0; color: #2c3e50;">주요 협력 업체</h3>
+  <div class="performance-categories">
+    <div class="category">
+      <h4><i class="fa-solid fa-building"></i> 호텔 & 리조트</h4>
+      <ul>
+        <li>롯데호텔 *** (2002~2013)</li>
+        <li>신라호텔 *** (2002~2013)</li>
+        <li>하얏트호텔 임직원 셔틀 (2007~2019)</li>
+        <li>씨사이드*** 리조트 (2019~2022)</li>
+      </ul>
+    </div>
+    
+    <div class="category">
+      <h4><i class="fa-solid fa-golf-ball-tee"></i> 골프클럽</h4>
+      <ul>
+        <li>캐슬렉스 제주 골프클럽 (2004~현재)</li>
+        <li>엘리시안 골프클럽 (2004~현재)</li>
+        <li>세인트포 골프클럽 (2015~현재)</li>
+        <li>블랙스톤 골프클럽 (2005~현재)</li>
+      </ul>
+    </div>
+    
+    <div class="category">
+      <h4><i class="fa-solid fa-graduation-cap"></i> 교육기관</h4>
+      <ul>
+        <li>브랭섬홀 아시아 (2014~현재)</li>
+        <li>세인트존스베리 아카데미 (2020~2024)</li>
+        <li>신성여중·고 통학버스 (2023~현재)</li>
+        <li>사대부중 통학버스 (2023~현재)</li>
+      </ul>
+    </div>
+    
+    <div class="category">
+      <h4><i class="fa-solid fa-landmark"></i> 공공기관</h4>
+      <ul>
+        <li>제주개발공사(JPDC) (2018~현재)</li>
+        <li>국립기상과학원 (2023~현재)</li>
+        <li>국립위성센터 (2024~현재)</li>
+        <li>한국수자원공사 (2025~)</li>
+      </ul>
+    </div>
+    
+    <div class="category">
+      <h4><i class="fa-solid fa-plane"></i> 항공 & 관광</h4>
+      <ul>
+        <li>대한항공 승무원 셔틀 (2020~현재)</li>
+        <li>제주관광공사 면세점 (2009~2021)</li>
+        <li>제주국제컨벤션센터 (2003~2010)</li>
+        <li>에코랜드 리조트 (2009~2014)</li>
+      </ul>
+    </div>
+    
+    <div class="category">
+      <h4><i class="fa-solid fa-globe"></i> 국제행사</h4>
+      <ul>
+        <li>UNEP 세계환경부장관회의 (2004)</li>
+        <li>APEC 고위관리·장관회의 (2025)</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
   <footer>
     <p>&copy; 2025 드림고속 관광버스. All Rights Reserved.</p>
@@ -373,6 +526,7 @@ css.kakao-btn {
 
 </body>
 </html>
+
 
 
 
