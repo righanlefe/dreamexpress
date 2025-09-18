@@ -1,581 +1,1481 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>드림고속 관광버스</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    body { margin:0; font-family:'Noto Sans KR',sans-serif; background:#fff; color:#111; line-height:1.6; }
-    nav { position:sticky; top:0; background:#000; display:flex; justify-content:center; padding:0.8rem; z-index:1000; }
-    nav a { color:white; margin:0 15px; text-decoration:none; font-weight:500; transition:0.3s; }
-    nav a:hover { color:#999; }
-
-    /* Hero */
-    .hero {
-      position: relative;
-      height: 80vh;
-      background: url("1.png") center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding-left: 5%;
-    }
-    .hero h2 {
-      font-size: 2.8rem;
-      margin: 0;
-      color: #fff;
-      white-space: nowrap;
-    }
-    .hero p { margin-top: 0.8rem; font-size: 1.2rem; color:#fff; }
-
-    section { max-width:1100px; margin:auto; padding:4rem 1.5rem; }
-    h2 { margin-bottom:1.5rem; font-size:1.8rem; color:#000; text-align:center; }
-
-    /* 회사소개 */
-    .about { display:flex; flex-wrap:wrap; gap:2rem; align-items:center; }
-    .about img {
-      flex:1;
-      max-width:450px;
-      width:100%;
-      height:auto;
-      border-radius:10px;
-      object-fit:cover;
-    }
-
-    /* 공통 그리드 */
-    .features, .services {
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap:1.5rem;
-      margin-top:2rem;
-    }
-    .fleet, .performance-grid {
-      display:grid;
-      gap:1rem;
-      margin-top:2rem;
-    }
-
-    .feature, .service, .card, .performance-item {
-      background:#fff;
-      border:1px solid #ddd;
-      border-radius:8px;
-      padding:1.5rem;
-      text-align:center;
-      box-shadow:0 2px 5px rgba(0,0,0,0.05);
-    }
-
-    /* 강점 섹션 개선 */
-    .feature {
-      position: relative;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      overflow: hidden;
-    }
-    
-    .feature:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    }
-    
-    .feature:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #007bff, #0056b3);
-    }
-    
-    .feature i {
-      font-size: 3rem;
-      color: #007bff;
-      margin-bottom: 1rem;
-      padding: 20px;
-      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-      border-radius: 50%;
-      width: 80px;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1rem auto;
-      transition: all 0.3s ease;
-    }
-    
-    .feature:hover i {
-      background: linear-gradient(135deg, #007bff, #0056b3);
-      color: white;
-      transform: scale(1.1);
-    }
-    
-    .feature h3 {
-      color: #2c3e50;
-      margin-bottom: 0.8rem;
-      font-weight: 600;
-    }
-    
-    .feature p {
-      color: #666;
-      line-height: 1.6;
-    }
-    
-    .feature-badge {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-      color: white;
-      padding: 4px 8px;
-      border-radius: 12px;
-      font-size: 0.7rem;
-      font-weight: bold;
-      letter-spacing: 0.5px;
-    }
-
-    .service i { font-size:2rem; color:#000; margin-bottom:0.5rem; }
-
-    /* 제공 서비스 이미지 크기 조정 */
-    .service img {
-      width: 100%;
-      height: 180px;
-      border-radius: 6px;
-      object-fit: cover;
-      margin-bottom: 1rem;
-    }
-
-    .card img, .performance-item img {
-      width:100%;
-      border-radius:6px;
-      object-fit:cover;
-    }
-
-    /* 보유차량 */
-    .fleet {
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    }
-    .card img {
-      height:220px;
-    }
-
-    /* 문의 및 예약 */
-    .reservation { display:flex; flex-wrap:wrap; gap:2rem; align-items:flex-start; }
-    .contact-info {
-      flex:1; min-width:250px;
-      background:#f9f9f9; padding:2rem;
-      border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.05);
-    }
-    .reservation-box { flex:1; min-width:250px; text-align:center; }
-    .btn {
-      display:inline-block;
-      background:#000;
-      color:white;
-      padding:12px 24px;
-      border-radius:8px;
-      text-decoration:none;
-      font-weight:bold;
-      transition:0.3s;
-    }
-    .btn:hover { background:#444; }
-css.kakao-btn {
-  display: inline-block;
-  background: #FEE500;
-  color: #3C1E1E;
-  padding: 10px 20px;
-  border-radius: 20px;
-  text-decoration: none;
-  font-weight: bold;
-  margin: 10px 0;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>드림고속 - 제주도 프리미엄 관광버스</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #2563eb;
+            --secondary: #0ea5e9;
+            --accent: #fbbf24;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-blue: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: #334155;
+            overflow-x: hidden;
+        }
+        
+        /* 네비게이션 - 플로팅 스타일 */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+       
+            .logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    background: var(--gradient-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
-.kakao-btn:hover {
-  background: #F5D800;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+.logo:hover {
+    transform: scale(1.05);
+}
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: #475569;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .cta-nav {
+            background: var(--gradient-blue);
+            color: white !important;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+        
+        .cta-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        /* 히어로 섹션 - 풀스크린 임팩트 */
+   
+.hero {
+    height: 100vh;
+    background: url('1.png') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.kakao-btn i {
-  margin-right: 5px;
-}
-    .naver-btn {
-  display: inline-block;
-  background: #03C75A;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: 0.3s;
-  margin-top: 10px;
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+    z-index: 1;
 }
 
-.naver-btn:hover {
-  background: #02B351;
-  transform: translateY(-2px);
+.hero-content {
+    text-align: center;
+    color: white;
+    z-index: 2;  
+    max-width: 900px;
+    padding: 0 2rem;
+    animation: fadeInUp 1s ease;
+}
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            font-family: 'Montserrat', sans-serif;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-hero {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+display: grid;             
+  place-items: center;
+  width: 20ch;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+            transform: none;
+        }
+
+
+.btn-outline:hover .btn-text::before {
+    content: '064)746-7300';
 }
 
-.naver-btn i {
-  margin-right: 5px;
-}
-    /* 운행실적 스타일 */
-.performance-summary {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin: 2rem 0 3rem 0;
-  text-align: center;
+.btn-outline .btn-text {
+    position: relative;
 }
 
-.summary-item {
-  background: linear-gradient(135deg, #007bff, #0056b3);
-  color: white;
-  padding: 2rem 1rem;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+.btn-outline .btn-text span {
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
-.summary-item h3 {
-  font-size: 2.5rem;
-  margin: 0 0 0.5rem 0;
-  font-weight: bold;
+.btn-outline:hover .btn-text span {
+    opacity: 0;
+}
+        
+/* ===== PATCH START: Hero 전화상담 버튼 폭 늘어남 수정 ===== */
+
+/* 버튼 레이아웃/디자인은 유지하고, 텍스트만 전환되게 함 */
+.btn-outline {
+  position: relative;          /* 오버레이 기준 */
+  overflow: hidden;            /* 라운드 밖 삐져나옴 방지 */
+  white-space: nowrap;         /* 줄바꿈 방지 → 폭 고정 */
 }
 
-.summary-item p {
-  font-size: 1rem;
-  margin: 0;
-  opacity: 0.9;
+/* 기존에 번호를 ::before 로 갈아끼우던 규칙 무력화 */
+.btn-outline .btn-text::before {
+  content: none !important;
 }
 
-.performance-categories {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
+/* 기본 문구(예: "전화 상담")는 보이되, 부드럽게 전환되도록 */
+.btn-outline .btn-text {
+  transition: opacity .25s ease;
 }
 
-.category {
-  background: #f8f9fa;
-  border: 1px solid #e9ecef;
-  border-radius: 10px;
-  padding: 1.5rem;
-}
-
-.category h4 {
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
+/* 전화번호는 레이아웃 영향 없는 절대배치 오버레이로 겹치기 */
+.btn-outline::after {
+  content: '064-746-7300';     /* ← 표시할 전화번호 (원하는 번호로 변경 가능) */
+  position: absolute;
+  inset: 0;                    /* 상하좌우 가득 */
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  opacity: 0;                  /* 기본은 숨김 */
+  pointer-events: none;        /* 클릭/포커스 방해 금지 */
+  transition: opacity .25s ease;
 }
 
-.category h4 i {
-  color: #007bff;
+/* 호버/포커스 시 번호만 페이드인, 기존 문구는 페이드아웃 */
+.btn-outline:hover .btn-text,
+.btn-outline:focus-visible .btn-text {
+  opacity: 0;
+}
+.btn-outline:hover::after,
+.btn-outline:focus-visible::after {
+  opacity: 1;
 }
 
-.category ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* 버튼 한 줄 유지(이미 있으면 생략 가능) */
+.btn-hero { 
+  white-space: nowrap; 
 }
 
-.category li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #e9ecef;
-  color: #666;
-  font-size: 0.9rem;
+/* 폰트/환경에 따라 문구가 극히 드물게 잘릴 수 있어 미세 여유폭 */
+.btn-outline .btn-text { 
+  padding-inline: .1em; 
 }
 
-.category li:last-child {
-  border-bottom: none;
+/* 모바일에서만 살짝 타이포 줄여 폭 안전장치(선택) */
+@media (max-width: 480px){
+  .btn-outline { font-size: 0.95rem; }
 }
+/* ===== PATCH END ===== */
 
-    /* 반응형 */
-    @media (max-width:1024px) {
-      .hero { height:60vh; justify-content:center; text-align:center; padding:0 1rem; }
-      .hero h2 { font-size:2.2rem; }
-      .hero p { font-size:1rem; }
-    }
-    @media (max-width:768px) {
-      .about { flex-direction:column; }
-      .about img { max-width:100%; }
-      .reservation { flex-direction:column; }
-      .features, .services {
-        grid-template-columns:repeat(3,1fr);
-      }
-      .fleet, .performance-grid {
-        grid-template-columns:repeat(3,1fr);
-      }
-      .card img { height:150px; }
-      .service img { height:140px; }
-      h2 { font-size:1.5rem; }
-    }
-    @media (max-width:480px) {
-      nav a { margin:0 8px; font-size:0.9rem; }
-      .hero h2 { font-size:1.6rem; }
-      .hero p { font-size:0.9rem; }
-      .features, .services, .fleet, .performance-grid {
-        grid-template-columns:repeat(2,1fr);
-      }
-      .card img { height:120px; }
-      .service img { height:120px; }
-    .performance-summary {
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-}
 
-.performance-categories {
-  grid-template-columns: 1fr;
-}
-
-.summary-item {
-  padding: 1.5rem 1rem;
-}
-
-.summary-item h3 {
-  font-size: 2rem;
-}
-    }
-  </style>
+        /* 통계 섹션 */
+        .stats {
+            background: white;
+            padding: 5rem 0;
+            position: relative;
+            margin-top: -100px;
+            z-index: 10;
+        }
+        
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .stat-label {
+            color: #64748b;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* 섹션 공통 */
+        section {
+            padding: 5rem 0;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-badge {
+            display: inline-block;
+            background: var(--gradient-blue);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+        
+        /* 회사소개 - 스토리텔링 */
+        #about {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .about-content p {
+            margin-bottom: 1.5rem;
+            color: #64748b;
+            line-height: 1.8;
+        }
+        
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-badge-floating {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        /* 강점 - 벤토 박스 스타일 */
+        #strengths {
+            background: white;
+        }
+        
+        .strengths-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .strength-card {
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            padding: 2.5rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .strength-card:nth-child(1) {
+            grid-column: span 2;
+            background: var(--gradient-blue);
+            color: white;
+        }
+        
+        .strength-card:nth-child(1) h3,
+        .strength-card:nth-child(1) p {
+            color: white;
+        }
+        
+        .strength-card:nth-child(1) .strength-icon {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .strength-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+        
+        .strength-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .strength-card:hover .strength-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+        
+        .strength-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .strength-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+        
+        /* 서비스 - 카드 호버 효과 */
+        #services {
+            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .service-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+        
+        .service-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 2rem;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        
+        .service-card:hover .service-overlay {
+            transform: translateY(0);
+        }
+        
+        .service-content {
+            padding: 1.5rem;
+        }
+        
+        .service-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        /* 차량 - 모던 갤러리 */
+        #fleet {
+            background: white;
+        }
+        
+        .fleet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .fleet-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .fleet-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        
+        .fleet-image {
+            height: 280px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .fleet-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .fleet-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .fleet-content {
+            padding: 1.5rem;
+        }
+        
+        .fleet-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .fleet-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .spec-tag {
+            background: #f0f9ff;
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        /* CTA 섹션 */
+        .cta-section {
+            background: var(--gradient-blue);
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+            animation: slide 10s linear infinite;
+        }
+        
+        @keyframes slide {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(40px, 40px); }
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+        }
+        
+        .cta-content h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .cta-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-white {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        
+        .btn-yellow {
+            background: var(--accent);
+            color: var(--dark);
+        }
+        
+        .btn-yellow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(251, 191, 36, 0.5);
+        }
+        
+        /* 연락처 섹션 */
+        #reservation {
+            background: white;
+            padding: 5rem 0;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-info {
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            color: #64748b;
+        }
+        
+        .contact-item i {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+        
+        .reservation-form {
+            background: var(--gradient-blue);
+            padding: 3rem;
+            border-radius: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .reservation-form h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .form-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn-form {
+            padding: 1.2rem 2rem;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-google {
+            background: white;
+            color: var(--dark);
+        }
+        
+        .btn-kakao {
+            background: #FEE500;
+            color: #3C1E1E;
+        }
+        
+        .btn-naver {
+            background: #03C75A;
+            color: white;
+        }
+        
+        .btn-form:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        
+        /* 푸터 */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        /* 모바일 메뉴 버튼 */
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        /* 반응형 */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 3rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .strengths-grid { grid-template-columns: 1fr; }
+            .strength-card:nth-child(1) { grid-column: span 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu { display: block; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .section-title { font-size: 2rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-grid { grid-template-columns: 1fr; }
+            .fleet-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .hero-buttons { flex-direction: column; }
+            .btn-hero { width: 100%; }
+        }
+    </style>
 </head>
 <body>
+    <!-- 네비게이션 -->
+    <nav>
+        <div class="nav-container">
+              <a href="#" class="logo" onclick="scrollToTop()">DREAM EXPRESS</a>
+            <div class="nav-links">
+                <a href="#about">회사소개</a>
+                <a href="#strengths">강점</a>
+                <a href="#services">서비스</a>
+                <a href="#fleet">보유차량</a>
+                <a href="#reservation" class="cta-nav">예약하기</a>
+            </div>
+            <button class="mobile-menu">☰</button>
+        </div>
+    </nav>
 
-  <!-- 네비게이션 -->
-  <nav>
-    <a href="#about">회사소개</a>
-    <a href="#strengths">강점</a>
-    <a href="#services">제공 서비스</a>
-    <a href="#fleet">보유차량</a>
-    <a href="#reservation">문의 및 예약</a>
-  </nav>
-
-  <!-- Hero -->
-  <section class="hero">
-    <div>
-      <h2>20년 이상 이어온 믿음과 신뢰</h2>
-      <p>드림고속은 안전과 편안함을 최우선으로, 전국과 제주를 연결하는 관광 파트너입니다.</p>
-    </div>
-  </section>
-
-  <!-- 회사소개 -->
-  <section id="about">
-    <h2>회사소개</h2>
-    <div class="about">
-      <img src="8.jpg" alt="우수관광사업체">
-      <p>2000년을 시작으로 출발한 드림고속은 현재 관광버스 58대를 보유하며, 기업, 학교, 가족 고객과 함께 수많은 여행의 길을 동행하고 있습니다. 2021년부터 제주관광협회 우수관광 사업체로 선정되었으며 세계관광여행협회 SAFE TRAVEL 인증, 제주도 우수 전세버스 업체 표창, 교통안전공단 안전 공시 1등급에 선정되었습니다. </p>
-       <p>DREAM BIZ : 골프장·호텔·기업·학교 임직원 및 학생 통근·통학 버스, 도내 세미나 및 컨벤션 등 하루의 시작과 끝을 책임지며 기업의 효율과 성장 그리고 직원 복지의 파트너입니다. 셔틀버스 노선 최적화, 셔틀버스 차량 사고·고장 및 노후화 관리, 셔틀버스 운영 인건비 등 비용은 낮추면서 더 높은 서비스를 제공합니다. 매일 똑같은 출·퇴근길을 보다 편안하고 보다 고급스러운 경험으로 바꾸어 나가는 파트너가 되길 꿈꿉니다. </p>
-       <p>DREAM MOMENT : 설레는 마음을 가지고 도착한 제주 여행. 잘못된 선택으로 여행 전체를 망치게되기도 합니다. 100% 직영 차량 및 운전원 배정으로 운전원과의 갈등을 최소화합니다. 불만족시 운전원 교체 서비스를 제공하며, 차량 고장시 즉시 차량 교체 서비스, 여행 일정 검토 및 식당·관광지·숙소 예약 대행 서비스 등 여행의 모든 편의를 제공합니다. 좋은 사람들과 함께하는 특별한 순간에 드림고속이 함께하기를 꿈꿉니다. </p>
-    </div>
-  </section>
-
-  <!-- 강점 -->
-  <section id="strengths">
-    <h2>드림고속의 강점</h2>
-    <div class="features">
-      <div class="feature">
-        <i class="fa-solid fa-shield-halved"></i>
-        <h3>안전 최우선</h3>
-        <p>자체 전문 정비팀 운영으로<br>최상의 안전을 보장합니다.</p>
-        <div class="feature-badge">SAFETY</div>
-      </div>
-      <div class="feature">
-        <i class="fa-solid fa-bus"></i>
-        <h3>다양한 차종 및 최신 차량</h3>
-        <p>전세버스 전 차종 및 최신 차량 보유<br>최신 차량 배정을 원할시 특별 요청하세요.</p>
-        <div class="feature-badge">NEW</div>
-      </div>
-      <div class="feature">
-        <i class="fa-solid fa-user-tie"></i>
-        <h3>전문 기사</h3>
-        <p>친절하고 경험 많은 기사님 배치<br>100% 회사 소속으로 안심 서비스</p>
-        <div class="feature-badge">PRO</div>
-      </div>
-      <div class="feature">
-        <i class="fa-solid fa-headset"></i>
-        <h3>전문 상담</h3>
-        <p>제주도 여행 전문 상담사가<br>최적의 솔루션을 제안합니다.</p>
-        <div class="feature-badge">24/7</div>
-      </div>
-      <div class="feature">
-        <i class="fa-solid fa-award"></i>
-        <h3>25년 전통</h3>
-        <p>2000년 창사 이래로 25년 이상<br>제주도 여행객들과 함께해왔습니다.</p>
-        <div class="feature-badge">TRUST</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 제공 서비스 -->
-  <section id="services">
-    <h2>제공 서비스</h2>
-    <div class="services">
-      <div class="service"><img src="수학여행사진.jpg" alt="수학여행"><h3>수학여행</h3></div>
-      <div class="service"><img src="기업세미나.jpg" alt="기업행사"><h3>기업행사</h3></div>
-      <div class="service"><img src="단체행사.png" alt="단체행사"><h3>단체행사</h3></div>
-      <div class="service"><img src="도내관광.jpg" alt="도내관광"><h3>도내관광</h3></div>
-      <div class="service"><img src="공항셔틀버스.png" alt="공항셔틀버스"><h3>공항셔틀버스</h3></div>
-      <div class="service"><img src="기업출퇴근버스.png" alt="기업출퇴근버스"><h3>기업출퇴근버스</h3></div>
-    </div>
-  </section>
-
-  <!-- 보유차량 -->
-  <section id="fleet">
-    <h2>보유차량</h2>
-    <div class="fleet">
-      <div class="card"><img src="대형45인승1.png" alt="45인승 대형버스"><h3>45인승 대형버스</h3></div>
-      <div class="card"><img src="드림고속009.jpg" alt="28인승 리무진버스"><h3>28인승 대형 리무진버스</h3></div>
-      <div class="card"><img src="카운티옆면.jpeg" alt="25인승 소형버스"><h3>25인승 소형버스</h3></div>
-      <div class="card"><img src="솔라티.jpeg" alt="16인승 솔라티"><h3>16인승 솔라티</h3></div>
-      <div class="card"><img src="3.jpg" alt="16인승 벤츠 스프린터"><h3>16인승 벤츠 스프린터</h3></div>
-      <div class="card"><img src="어린이통학차량.JPG" alt="34인승 중형버스"><h3>34인승 중형버스</h3></div>
-      <div class="card"><img src="리프트1.JPG" alt="휠체어 리프트 특장 버스"><h3>휠체어 리프트 특장 버스</h3></div>
-    </div>
-  </section>
-
-  <!-- 문의 및 예약 -->
-  <section id="reservation">
-    <h2>문의 및 예약</h2>
-    <div class="reservation">
-      <div class="contact-info">
-        <p><strong>대표전화:</strong> 064-746-7300</p>
-        <p><strong>카카오톡:</strong> @드림고속</p>
-        <a href="http://pf.kakao.com/_wTPkn/chat" target="_blank" class="kakao-btn">
-  <i class="fa-solid fa-comment"></i> 카카오톡 상담하기
-</a>
-        <p><strong>이메일:</strong> ans2941@daum.net</p>
-        <p><strong>인스타그램:</strong>https://www.instagram.com/jejudream_express/</p>
-        <p><strong>주소:</strong> 제주특별자치도 제주시 평화로 2861</p>
-        <p><strong>상담시간:</strong> 연중무휴</p>
-      </div>
-      <div class="reservation-box">
-        <div class="reservation-box">
-  <p>예약은 구글폼을 통해 간편하게 하실 수 있습니다.<br>아래 버튼을 클릭하면 예약 페이지로 이동합니다.</p>
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLScNUg0N6szqnw3JM7S7ubIZMqvCFOPRNj3o_EnLqRhxPQA5Xw/viewform?usp=sharing&ouid=115619500531948794040" target="_blank" class="btn"><i class="fa-solid fa-calendar-check"></i> 예약하기</a>
-  
-  <p style="margin-top: 2rem;">또는 네이버 스토어에서도 예약 가능합니다.(준비중)</p>
-  <a href="https://smartstore.naver.com/여기에_스토어_URL" target="_blank" class="naver-btn">
-    <i class="fa-solid fa-store"></i> 네이버 스토어에서 예약하기
-  </a>
-</div>
-  </section>
-
-<!-- 운행실적 -->
-<section class="performance">
-  <h2>운행실적</h2>
-  <div class="performance-summary">
-    <div class="summary-item">
-      <h3>25년+</h3>
-      <p>운행 경험</p>
-    </div>
-    <div class="summary-item">
-      <h3>30+</h3>
-      <p>협력 업체</p>
-    </div>
-    <div class="summary-item">
-      <h3>58대</h3>
-      <p>보유 차량</p>
-    </div>
-    <div class="summary-item">
-      <h3>1등급</h3>
-      <p>안전 공시</p>
-    </div>
-  </div>
-  
-  <h3 style="text-align: center; margin: 3rem 0 2rem 0; color: #2c3e50;">주요 협력 업체 및 역대 운행 실적</h3>
-  <div class="performance-categories">
-    <div class="category">
-      <h4><i class="fa-solid fa-building"></i> 호텔 & 리조트</h4>
-      <ul>
-        <li>롯*호텔 임직원 및 고객 셔틀버스</li>
-        <li>신*호텔 임직원 및 고객 셔틀버스</li>
-        <li>하**호텔 임직원 및 고객 셔틀버스</li>
-        <li>씨** 리조트 임직원 및 고객 셔틀버스</li>
-           <li>에*** 리조트 임직원 및 고객 셔틀버스</li>
-      </ul>
-    </div>
-    
-    <div class="category">
-      <h4><i class="fa-solid fa-golf-ball-tee"></i> 골프클럽</h4>
-      <ul>
-        <li>캐*** 골프클럽 임직원 및 고객 셔틀버스</li>
-        <li>엘*** 골프클럽 임직원 및 고객 셔틀버스</li>
-        <li>세*** 골프클럽 임직원 및 고객 셔틀버스</li>
-        <li>아*** 골프클럽 임직원 및 고객 셔틀버스</li>
-        <li>블*** 골프클럽 임직원 및 고객 셔틀버스</li>
-      </ul>
-    </div>
-    
-    <div class="category">
-      <h4><i class="fa-solid fa-graduation-cap"></i> 교육기관</h4>
-      <ul>
-        <li>B*** 국제학교 교직원 및 학생 셔틀버스 </li>
-        <li>S*** 국제학교 교직원 및 학생 셔틀버스</li>
-        <li>N*** 국제학교 교직원 및 학생 셔틀버스</li>
-        <li>제주도내 초,중,고등학교 통학버스 다수</li>
-        <li>국내 초,중,고등학교 제주도 수학여행 버스</li>
+    <!-- 히어로 섹션 -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Since 2000 · 제주도 No.1 관광버스</div>
+            <h1>제주 여행의<br>완벽한 파트너</h1>
+            <p>25년 전통, 58대 버스 보유, 안전공시 1등급<br>드림고속과 함께 특별한 제주를 경험하세요</p>
+            <div class="hero-buttons">
+                <a href="#reservation" class="btn-hero btn-primary">
+                    <i class="fas fa-calendar-check"></i> 지금 예약하기
+                </a>
+                <a class="btn-outline btn-hero">
+  <span class="btn-text">
+     <i class="fas fa-phone"></i> 전화예약
+    <span class="label-hover">
       
-      </ul>
-    </div>
-    
-    <div class="category">
-      <h4><i class="fa-solid fa-landmark"></i> 공공기관</h4>
-      <ul>
-        <li>제주** 공사 임직원 셔틀버스</li>
-        <li>국립**과학원 임직원 셔틀버스</li>
-        <li>국립**센터 임직원 셔틀버스</li>
-        <li>한국***공사 임직원 셔틀버스</li>
-        <li>제주**관리소 임직원 셔틀버스</li>
-      </ul>
-    </div>
-    
-    <div class="category">
-      <h4><i class="fa-solid fa-plane"></i> 항공 & 관광</h4>
-      <ul>
-        <li>D항공사 승무원 셔틀버스</li>
-        <li>A항공사 승무원 셔틀버스</li>
-        <li>제주** 면세점 임직원 셔틀버스</li>
-        <li>제주**컨벤션센터 임직원 셔틀버스</li>
-     <li>제주**컨벤션센터 임직원 셔틀버스</li>
-      </ul>
-    </div>
-    
-    <div class="category">
-      <h4><i class="fa-solid fa-globe"></i> 국제행사</h4>
-      <ul>
-        <li>UNEP 세계환경부장관회의 셔틀버스</li>
-        <li>APEC 고위관리·장관회의 셔틀버스</li>
-        <li>제주 입항 크루즈 승객 수송</li>
-        <li>제주 강정 크루즈 터미널 셔틀버스</li>
-      </ul>
-    </div>
-  </div>
-</section>
+    </span>
+  </span>
+</a>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    <p>&copy; 2025 드림고속 관광버스. All Rights Reserved.</p>
-  </footer>
+    <!-- 통계 섹션 -->
+    <div class="stats">
+        <div class="stats-container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">년간 운행 경험</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">58</div>
+                    <div class="stat-label">보유 차량</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">협력 업체</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1등급</div>
+                    <div class="stat-label">안전 공시</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- 회사소개 -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">ABOUT US</span>
+                <h2 class="section-title">드림고속을 소개합니다</h2>
+                <p class="section-subtitle">제주도 관광버스 업계를 선도하는 기업</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-content">
+                    <h3>25년간 쌓아온 신뢰와 전문성</h3>
+                    <p>2000년 창립 이래, 드림고속은 제주도 관광버스 업계의 선두주자로 자리매김했습니다. 58대의 최신 차량과 100% 직영 운영 시스템으로 최고의 서비스를 제공합니다.</p>
+                    <p>제주관광협회 우수관광사업체, 세계관광여행협회 SAFE TRAVEL 인증, 교통안전공단 안전공시 1등급 등 공신력 있는 기관으로부터 인정받은 전문성을 바탕으로 고객님께 안전하고 편안한 여행을 약속합니다.</p>
+                    <p>DREAM BIZ와 DREAM MOMENT 두 가지 특화 서비스로 기업 출퇴근부터 특별한 여행까지, 모든 이동의 순간을 책임집니다.</p>
+                </div>
+                <div class="about-image">
+                    <img src="8.jpg" alt="드림고속 우수관광사업체">
+                    <div class="about-badge-floating">
+                        <i class="fas fa-award"></i> 우수관광사업체
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 강점 섹션 -->
+    <section id="strengths">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">WHY CHOOSE US</span>
+                <h2 class="section-title">드림고속만의 특별함</h2>
+                <p class="section-subtitle">고객님의 안전과 만족을 최우선으로 생각합니다</p>
+            </div>
+            <div class="strengths-grid">
+                <div class="strength-card">
+                    <div class="strength-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>안전 최우선 경영</h3>
+                    <p>자체 전문 정비팀 운영, 정기 안전 점검, 교통안전공단 1등급 인증으로 완벽한 안전을 보장합니다.</p>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-icon">
+                        <i class="fas fa-bus"></i>
+                    </div>
+                    <h3>최신 차량 58대 보유</h3>
+                    <p>전 차종 최신 모델 구비, 고객 요청시 신차 우선 배정</p>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>100% 직영 기사</h3>
+                    <p>모든 기사님이 회사 소속, 체계적인 교육과 관리</p>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24시간 전문 상담</h3>
+                    <p>연중무휴 상담 가능, 맞춤형 일정 컨설팅</p>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>공인 인증 보유</h3>
+                    <p>우수관광사업체, SAFE TRAVEL 인증 등</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 서비스 섹션 -->
+    <section id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">SERVICES</span>
+                <h2 class="section-title">제공 서비스</h2>
+                <p class="section-subtitle">다양한 목적에 맞는 맞춤형 서비스를 제공합니다</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="수학여행사진.jpg" alt="수학여행">
+                        <div class="service-overlay">
+                            <p style="color: white;">안전한 학생 단체 이동, 교육 프로그램 연계</p>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>수학여행</h3>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="기업세미나.jpg" alt="기업행사">
+                        <div class="service-overlay">
+                            <p style="color: white;">워크샵, 세미나, 컨벤션 전문 운행</p>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>기업행사</h3>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="단체행사.png" alt="단체행사">
+                        <div class="service-overlay">
+                            <p style="color: white;">각종 단체 모임 및 행사 지원</p>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>단체행사</h3>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="도내관광.jpg" alt="도내관광">
+                        <div class="service-overlay">
+                            <p style="color: white;">제주도 구석구석 관광 코스 안내</p>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>도내관광</h3>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="공항셔틀버스.png" alt="공항셔틀">
+                        <div class="service-overlay">
+                            <p style="color: white;">공항 픽업 & 드롭 서비스</p>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>공항셔틀</h3>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="기업출퇴근버스.png" alt="출퇴근버스">
+                        <div class="service-overlay">
+                            <p style="color: white;">임직원 정기 출퇴근 운행</p>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>기업 출퇴근</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 차량 섹션 -->
+    <section id="fleet">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">OUR FLEET</span>
+                <h2 class="section-title">보유 차량</h2>
+                <p class="section-subtitle">목적과 인원에 맞는 다양한 차종 보유</p>
+            </div>
+            <div class="fleet-grid">
+                <div class="fleet-card">
+                    <div class="fleet-image">
+                        <img src="대형45인승1.png" alt="45인승 대형버스">
+                        <span class="fleet-badge">BEST</span>
+                    </div>
+                    <div class="fleet-content">
+                        <h3>45인승 대형버스</h3>
+                        <div class="fleet-specs">
+                            <span class="spec-tag">에어컨</span>
+                            <span class="spec-tag">USB충전</span>
+                            <span class="spec-tag">냉장고</span>
+                            <span class="spec-tag">노래방</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fleet-card">
+                    <div class="fleet-image">
+                        <img src="드림고속009.jpg" alt="28인승 리무진">
+                        <span class="fleet-badge">PREMIUM</span>
+                    </div>
+                    <div class="fleet-content">
+                        <h3>28인승 대형 리무진버스</h3>
+                        <div class="fleet-specs">
+                            <span class="spec-tag">가죽시트</span>
+                            <span class="spec-tag">와이드</span>
+                            <span class="spec-tag">프리미엄</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fleet-card">
+                    <div class="fleet-image">
+                        <img src="카운티옆면.jpeg" alt="25인승 소형버스">
+                        <span class="fleet-badge">인기</span>
+                    </div>
+                    <div class="fleet-content">
+                        <h3>25인승 소형버스</h3>
+                        <div class="fleet-specs">
+                            <span class="spec-tag">소규모</span>
+                            <span class="spec-tag">경제적</span>
+                            <span class="spec-tag">편안함</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fleet-card">
+                    <div class="fleet-image">
+                        <img src="솔라티.jpeg" alt="16인승 솔라티">
+                    </div>
+                    <div class="fleet-content">
+                        <h3>16인승 솔라티</h3>
+                        <div class="fleet-specs">
+                            <span class="spec-tag">미니버스</span>
+                            <span class="spec-tag">가족여행</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fleet-card">
+                    <div class="fleet-image">
+                        <img src="3.jpg" alt="벤츠 스프린터">
+                        <span class="fleet-badge">LUXURY</span>
+                    </div>
+                    <div class="fleet-content">
+                        <h3>16인승 벤츠 스프린터</h3>
+                        <div class="fleet-specs">
+                            <span class="spec-tag">럭셔리</span>
+                            <span class="spec-tag">VIP</span>
+                            <span class="spec-tag">최고급</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fleet-card">
+                    <div class="fleet-image">
+                        <img src="어린이통학차량.JPG" alt="34인승 중형버스">
+                    </div>
+                    <div class="fleet-content">
+                        <h3>34인승 중형버스</h3>
+                        <div class="fleet-specs">
+                            <span class="spec-tag">통학용</span>
+                            <span class="spec-tag">안전벨트</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fleet-card">
+                    <div class="fleet-image">
+                        <img src="리프트1.JPG" alt="휠체어 리프트">
+                        <span class="fleet-badge">특수</span>
+                    </div>
+                    <div class="fleet-content">
+                        <h3>휠체어 리프트 특장버스</h3>
+                        <div class="fleet-specs">
+                            <span class="spec-tag">배리어프리</span>
+                            <span class="spec-tag">리프트</span>
+                            <span class="spec-tag">특수차량</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 운행실적 섹션 -->
+    <section id="performance" style="background: #f8fafc; padding: 5rem 0;">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">PERFORMANCE</span>
+                <h2 class="section-title">주요 협력업체 및 역대 운행실적</h2>
+                <p class="section-subtitle">25년간 함께해온 신뢰의 파트너십</p>
+            </div>
+            
+            <div class="performance-categories" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 3rem;">
+                <div class="category" style="background: white; border: 1px solid #e9ecef; border-radius: 15px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: all 0.3s ease;">
+                    <h4 style="color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-building" style="color: #2563eb; background: #f0f9ff; padding: 10px; border-radius: 10px;"></i> 호텔 & 리조트
+                    </h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">롯*호텔 임직원 및 고객 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">신*호텔 임직원 및 고객 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">하**호텔 임직원 및 고객 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">씨** 리조트 임직원 및 고객 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; color: #64748b; font-size: 0.95rem;">에*** 리조트 임직원 및 고객 셔틀버스</li>
+                    </ul>
+                </div>
+                
+                <div class="category" style="background: white; border: 1px solid #e9ecef; border-radius: 15px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: all 0.3s ease;">
+                    <h4 style="color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-golf-ball-tee" style="color: #2563eb; background: #f0f9ff; padding: 10px; border-radius: 10px;"></i> 골프클럽
+                    </h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">캐*** 골프클럽 임직원 및 고객 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">엘*** 골프클럽 임직원 및 고객 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">세*** 골프클럽 임직원 및 고객 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">아*** 골프클럽 임직원 및 고객 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; color: #64748b; font-size: 0.95rem;">블*** 골프클럽 임직원 및 고객 셔틀버스</li>
+                    </ul>
+                </div>
+                
+                <div class="category" style="background: white; border: 1px solid #e9ecef; border-radius: 15px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: all 0.3s ease;">
+                    <h4 style="color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-graduation-cap" style="color: #2563eb; background: #f0f9ff; padding: 10px; border-radius: 10px;"></i> 교육기관
+                    </h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">B*** 국제학교 교직원 및 학생 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">S*** 국제학교 교직원 및 학생 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">N*** 국제학교 교직원 및 학생 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">제주도내 초,중,고등학교 통학버스 다수</li>
+                        <li style="padding: 0.7rem 0; color: #64748b; font-size: 0.95rem;">국내 초,중,고등학교 제주도 수학여행 버스</li>
+                    </ul>
+                </div>
+                
+                <div class="category" style="background: white; border: 1px solid #e9ecef; border-radius: 15px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: all 0.3s ease;">
+                    <h4 style="color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-landmark" style="color: #2563eb; background: #f0f9ff; padding: 10px; border-radius: 10px;"></i> 공공기관
+                    </h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">제주** 공사 임직원 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">국립**과학원 임직원 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">국립**센터 임직원 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">한국***공사 임직원 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; color: #64748b; font-size: 0.95rem;">제주**관리소 임직원 셔틀버스</li>
+                    </ul>
+                </div>
+                
+                <div class="category" style="background: white; border: 1px solid #e9ecef; border-radius: 15px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: all 0.3s ease;">
+                    <h4 style="color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-plane" style="color: #2563eb; background: #f0f9ff; padding: 10px; border-radius: 10px;"></i> 항공 & 관광
+                    </h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">D항공사 승무원 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">A항공사 승무원 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">제주** 면세점 임직원 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">제주**컨벤션센터 임직원 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; color: #64748b; font-size: 0.95rem;">제주**컨벤션센터 임직원 셔틀버스</li>
+                    </ul>
+                </div>
+                
+                <div class="category" style="background: white; border: 1px solid #e9ecef; border-radius: 15px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: all 0.3s ease;">
+                    <h4 style="color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-globe" style="color: #2563eb; background: #f0f9ff; padding: 10px; border-radius: 10px;"></i> 국제행사
+                    </h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">UNEP 세계환경부장관회의 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">APEC 고위관리·장관회의 셔틀버스</li>
+                        <li style="padding: 0.7rem 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 0.95rem;">제주 입항 크루즈 승객 수송</li>
+                        <li style="padding: 0.7rem 0; color: #64748b; font-size: 0.95rem;">제주 강정 크루즈 터미널 셔틀버스</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- 연락처 섹션 -->
+    <section id="reservation">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">CONTACT</span>
+                <h2 class="section-title">문의 및 예약</h2>
+                <p class="section-subtitle">연중무휴 24시간 상담 가능합니다</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>연락처 정보</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>대표전화</strong><br>
+                            064-746-7300
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-comment"></i>
+                        <div>
+                            <strong>카카오톡</strong><br>
+                            @드림고속
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>이메일</strong><br>
+                            ans2941@daum.net
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-instagram"></i>
+                        <div>
+                            <strong>인스타그램</strong><br>
+                            @jejudream_express
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>주소</strong><br>
+                            제주특별자치도 제주시 평화로 2861
+                        </div>
+                    </div>
+                </div>
+                <div class="reservation-form">
+                    <h3>온라인 예약</h3>
+                    <p>간편하게 온라인으로 예약하세요</p>
+                    <div class="form-buttons">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScNUg0N6szqnw3JM7S7ubIZMqvCFOPRNj3o_EnLqRhxPQA5Xw/viewform" target="_blank" class="btn-form btn-google">
+                            <i class="fas fa-file-alt"></i> Google Form으로 예약
+                        </a>
+                        <a href="http://pf.kakao.com/_wTPkn/chat" target="_blank" class="btn-form btn-kakao">
+                            <i class="fas fa-comment"></i> 카카오톡 상담
+                        </a>
+                        <a href="#" class="btn-form btn-naver">
+                            <i class="fas fa-store"></i> 네이버 예약 (준비중)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 드림고속. All Rights Reserved.</p>
+            <p>사업자등록번호: 616-81-28909 | 대표: 고창호</p>
+        </div>
+    </footer>
+
+    <script>
+        // 스크롤 애니메이션
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.boxShadow = '0 5px 30px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 모바일 메뉴 토글
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'white';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.padding = '2rem';
+                navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // 스크롤 시 요소 나타나기
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // 애니메이션 적용할 요소들
+        document.querySelectorAll('.strength-card, .service-card, .fleet-card, .stat-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // 카운터 애니메이션
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = element.dataset.suffix ? target + element.dataset.suffix : target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current) + (element.dataset.suffix || '');
+                }
+            }, 30);
+        }
+
+// 로고 클릭시 최상단으로 이동
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+        // 통계 숫자 애니메이션
+        const statObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                    entry.target.classList.add('animated');
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(num => {
+                        const text = num.textContent;
+                        const value = parseInt(text.replace(/\D/g, ''));
+                        if (!isNaN(value)) {
+                            num.dataset.suffix = text.replace(/[0-9]/g, '');
+                            animateCounter(num, value);
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stats-grid').forEach(el => {
+            statObserver.observe(el);
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
